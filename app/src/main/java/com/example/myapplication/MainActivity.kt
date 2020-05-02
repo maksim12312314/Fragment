@@ -9,8 +9,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val tr = supportFragmentManager.beginTransaction()
-        tr.replace(android.R.id.content, ListFragment())
-        tr.commit()
+       // val tr = supportFragmentManager.beginTransaction()
+       // tr.replace(android.R.id.content, ListFragment())
+       // tr.commit()
     }
 }

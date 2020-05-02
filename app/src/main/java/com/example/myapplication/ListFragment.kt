@@ -9,6 +9,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -63,10 +66,11 @@ class ListFragment:Fragment() {
     }
 
     fun goTo(item:ToDoModel){
-        val tr = fragmentManager?.beginTransaction()
-        tr?.replace(android.R.id.content, itemFragment.newItem(item.id) )
-        tr?.addToBackStack(null)
-        tr?.commit()
+        findNavController().navigate()
+        //val tr = fragmentManager?.beginTransaction()
+        // tr?.replace(android.R.id.content, itemFragment.newItem(item.id) )
+        //tr?.addToBackStack(null)
+        //tr?.commit()
     }
 
 }
