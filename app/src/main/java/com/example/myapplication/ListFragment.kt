@@ -66,7 +66,7 @@ class ListFragment:Fragment() {
     }
 
     fun goTo(item:ToDoModel){
-        findNavController().navigate(ListFragmentDirections)
+        findNavController().navigate(ListFragmentDirections.actionListFragmentToItemFragment(item.id))
         //val tr = fragmentManager?.beginTransaction()
         // tr?.replace(android.R.id.content, itemFragment.newItem(item.id) )
         //tr?.addToBackStack(null)

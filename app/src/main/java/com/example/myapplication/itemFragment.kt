@@ -10,9 +10,10 @@ import androidx.fragment.app.Fragment
 class itemFragment:Fragment( ){
 
     companion object{
-        fun newItem(id:String) = itemFragment().apply {
-            arguments = Bundle().apply { putString("id", id) }
-        }
+        fun newItem(id:String) = itemFragment()
+            //.apply {
+            //arguments = Bundle().apply { putString("id", id) }
+        //}
     }
 
     override fun onCreateView(
@@ -24,7 +25,10 @@ class itemFragment:Fragment( ){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = arguments?.getString("id")
+        //val id = arguments?.getString("id")
+
+        val id = arguments?.let{itemFragmentArgs.fromBundle(it).id}
+
         val view = getView()
 
         val description = view?.findViewById<TextView>(R.id.rosterDescription)
