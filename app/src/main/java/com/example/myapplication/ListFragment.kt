@@ -5,16 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Adapter
 
 class OurListAdapter(val context: Context?, val items:List<ToDoModel>, val cb: (ToDoModel)->Unit ):RecyclerView.Adapter<OurListAdapter.OurListViewHolder>(){
 
@@ -56,9 +53,17 @@ class ListFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val items = ToDoRepository.getItems()
+        val items = mutableListOf<ToDoModel>()
+        // items = ToDoRepository.getItems()
 
+        val vm = ViewModelProviders.of(this, ListViewModelFactory(savedInstanceState)).get(ListViewModel::class.java)
         val adapter = OurListAdapter(context , items,  ::goTo)
+        vm.items.observe(viewLifecycleOwner, Observer {
+            items.addAll(it)
+            adapter.notifyDataSetChanged()
+        })
+
+
 
         val recycler = view.findViewById<RecyclerView>(R.id.roster)
         recycler.adapter = adapter
